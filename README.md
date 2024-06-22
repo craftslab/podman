@@ -8,6 +8,14 @@
 
 
 
+## Dependency
+
+```bash
+sudo apt install -y libgpgme-dev
+```
+
+
+
 ## Reference
 
 - [creating-debianubuntu-deb-packages](https://www.iodigital.com/en/history/intracto/creating-debianubuntu-deb-packages)
