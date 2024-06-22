@@ -6,6 +6,9 @@ on:
     tags:
       - 'v*.*.*'
 
+permissions:
+  contents: write
+
 jobs:
   release:
     name: Released on ${{matrix.os}}
@@ -36,7 +39,7 @@ jobs:
         run: ./release.sh ${{ env.VERSION_NAME }}
       - name: '🚀 Upload'
         env:
-          GITHUB_TOKEN: ${{ github.CRAFTSLAB_TOKEN }}
+          GH_TOKEN: ${{ github.CRAFTSLAB_TOKEN }}
         shell: bash
         run: |
           cd ${{github.workspace}}
