@@ -20,8 +20,10 @@ jobs:
           fetch-depth: 1
       - name: '🔤 Set env'
         run: |
-          echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-          echo "VERSION_NAME=${TAG_NAME#v}" >> $GITHUB_ENV
+          TAG_NAME=${GITHUB_REF#refs/*/}
+          echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
+          VERSION_NAME=${TAG_NAME#v}
+          echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
       - name: '🔧 Install Go'
         uses: actions/setup-go@v2
         with:
