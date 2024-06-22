@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Set version
-release="$1"
-version=${release#"v"}
+version="$1"
 
 # Fetch podman
 curl -LO https://github.com/containers/podman/archive/refs/tags/v"$version".zip

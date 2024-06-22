@@ -19,7 +19,9 @@ jobs:
         with:
           fetch-depth: 1
       - name: '🔤 Set env'
-        run: echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        run: |
+          echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          echo "VERSION_NAME=${TAG_NAME#v}" >> $GITHUB_ENV
       - name: '🔧 Install Go'
         uses: actions/setup-go@v2
         with:
@@ -29,12 +31,12 @@ jobs:
         run: ./install.sh
       - name: '📦 Release'
         shell: bash
-        run: ./release.sh ${{ env.TAG_NAME }}
+        run: ./release.sh ${{ env.VERSION_NAME }}
       - name: '🚀 Upload'
         env:
           GITHUB_TOKEN: ${{ github.CRAFTSLAB_TOKEN }}
         shell: bash
         run: |
           cd ${{github.workspace}}
-          mv release.deb podman-${{matrix.os}}-amd64.deb
+          mv podman-${{ env.VERSION_NAME }}/release.deb podman-${{matrix.os}}-amd64.deb
           gh release upload ${{ env.TAG_NAME }} podman-${{matrix.os}}-amd64.deb
