@@ -4,14 +4,6 @@
 release="$1"
 version=${release#"v"}
 
-# Install Go
-curl -L https://go.dev/dl/go1.22.4.linux-amd64.tar.gz -o go.tar.gz
-tar zxvf go.tar.gz
-rm go.tar.gz
-
-# Set path
-export PATH=$PWD/go/bin:$PATH
-
 # Fetch podman
 curl -LO https://github.com/containers/podman/archive/refs/tags/v"$version".zip
 unzip v"$version".zip
