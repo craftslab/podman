@@ -1,0 +1,36 @@
+---
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Released on ${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ ubuntu-20.04, ubuntu-22.04 ]
+    steps:
+      - name: '📄 Checkout'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: '🔧 Install'
+        shell: bash
+        run: ./install.sh
+      - name: '📦 Release'
+        shell: bash
+        run: ./release.sh ${{github.event.release.tag_name}}
+      - name: '🚀 Upload'
+        env:
+          GITHUB_TOKEN: ${{ github.CRAFTSLAB_TOKEN }}
+        shell: bash
+        run: |
+          cd ${{github.workspace}}
+          mv release.deb podman-${{matrix.os}}-amd64.deb
+          gh release upload ${{github.event.release.tag_name}} podman-${{matrix.os}}-amd64.deb
