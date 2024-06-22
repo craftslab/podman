@@ -6,9 +6,6 @@ on:
     tags:
       - 'v*.*.*'
 
-permissions:
-  contents: write
-
 jobs:
   release:
     name: Released on ${{matrix.os}}
@@ -38,10 +35,11 @@ jobs:
         shell: bash
         run: ./release.sh ${{ env.VERSION_NAME }}
       - name: '🚀 Upload'
-        env:
-          GITHUB_TOKEN: ${{ secrets.PODMAN_TOKEN }}
-        shell: bash
-        run: |
-          cd ${{github.workspace}}
-          mv podman-${{ env.VERSION_NAME }}/release.deb podman-${{matrix.os}}-amd64.deb
-          gh release upload ${{ env.TAG_NAME }} podman-${{matrix.os}}-amd64.deb
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.PODMAN_TOKEN }}
+          file: podman-${{ env.VERSION_NAME }}/release.deb
+          asset_name: podman-${{matrix.os}}-amd64.deb
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "Podman ${{ env.VERSION_NAME }} released"
