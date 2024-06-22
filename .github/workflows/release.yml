@@ -39,7 +39,7 @@ jobs:
         run: ./release.sh ${{ env.VERSION_NAME }}
       - name: '🚀 Upload'
         env:
-          GH_TOKEN: ${{ github.CRAFTSLAB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PODMAN_TOKEN }}
         shell: bash
         run: |
           cd ${{github.workspace}}
