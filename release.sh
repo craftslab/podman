@@ -39,9 +39,9 @@ curl -L https://github.com/containers/fuse-overlayfs/releases/download/v1.13/fus
 chmod +x release/bin/fuse-overlayfs
 
 # Install netavark
-mkdir -p release/libexec/podman
-cp ../netavark/bin/netavark release/libexec/podman/
-chmod +x release/libexec/podman/netavark
+mkdir -p release/lib/podman
+cp ../netavark/bin/netavark release/lib/podman/
+chmod +x release/lib/podman/netavark
 
 # Set package
 mkdir -p "$PWD"/release/DEBIAN
