@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # Install packages
+sudo apt update
 sudo apt install -y \
   btrfs-progs \
+  containernetworking-plugins \
   crun \
   git \
-  golang-go \
   go-md2man \
   iptables \
   libassuan-dev \
@@ -21,5 +22,6 @@ sudo apt install -y \
   libselinux1-dev \
   libsystemd-dev \
   pkg-config \
-  uidmap \
-  containernetworking-plugins
+  protobuf-compiler \
+  slirp4netns \
+  uidmap
