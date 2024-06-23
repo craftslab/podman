@@ -1,6 +1,5 @@
 # podman
 
-[![Build Status](https://github.com/craftslab/podman/workflows/release/badge.svg?branch=main&event=push)](https://github.com/craftslab/podman/actions?query=workflow%3Arelease)
 [![License](https://img.shields.io/github/license/craftslab/podman.svg)](https://github.com/craftslab/podman/blob/main/LICENSE)
 [![Tag](https://img.shields.io/github/tag/craftslab/podman.svg)](https://github.com/craftslab/podman/tags)
 
