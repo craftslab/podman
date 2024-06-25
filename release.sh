@@ -49,7 +49,7 @@ chmod +x release/lib/podman/netavark
 # https://src.fedoraproject.org/rpms/containers-common/blob/main/f/mounts.conf
 # https://src.fedoraproject.org/rpms/containers-common/blob/main/f/registries.conf
 # https://src.fedoraproject.org/rpms/containers-common/blob/main/f/seccomp.json
-cp config/* release/etc/containers/
+cp ../config/* release/etc/containers/
 sed -i -e 's/#default_rootless_network_cmd = "pasta"/default_rootless_network_cmd = "slirp4netns"/g' release/etc/containers/containers.conf
 
 # Set package
