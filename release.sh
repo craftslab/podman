@@ -43,6 +43,15 @@ mkdir -p release/lib/podman
 cp ../netavark/bin/netavark release/lib/podman/
 chmod +x release/lib/podman/netavark
 
+# Install config
+# https://github.com/containers/common/blob/main/pkg/config/containers.conf
+# https://src.fedoraproject.org/rpms/containers-common/blob/main/f/default-policy.json
+# https://src.fedoraproject.org/rpms/containers-common/blob/main/f/mounts.conf
+# https://src.fedoraproject.org/rpms/containers-common/blob/main/f/registries.conf
+# https://src.fedoraproject.org/rpms/containers-common/blob/main/f/seccomp.json
+cp config/* release/etc/containers/
+sed -i -e 's/#default_rootless_network_cmd = "pasta"/default_rootless_network_cmd = "slirp4netns"/g' release/etc/containers/containers.conf
+
 # Set package
 mkdir -p "$PWD"/release/DEBIAN
 bash -c "cat > $PWD/release/DEBIAN/control" << EOF
