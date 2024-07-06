@@ -5,7 +5,6 @@ sudo apt update
 sudo apt install -y \
   btrfs-progs \
   containernetworking-plugins \
-  crun \
   git \
   go-md2man \
   iptables \

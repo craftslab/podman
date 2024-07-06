@@ -17,31 +17,34 @@ git clone https://github.com/containers/podman/ -b v"$version" --depth=1
 
 pushd podman || exit
 
+# Make path
+mkdir -p release/usr
+
 # Build podman
-make BUILDTAGS="selinux seccomp" PREFIX="$PWD"/release
+make all BUILDTAGS="selinux seccomp" PREFIX="$PWD"/release/usr
 
 # Install podman
-make install PREFIX="$PWD"/release
+make install PREFIX="$PWD"/release/usr
 
 # Install buildah
 # TBD
 
 # Install conmon
-curl -L https://github.com/containers/conmon/releases/download/v2.1.12/conmon.amd64 -o release/bin/conmon
-chmod +x release/bin/conmon
+curl -L https://github.com/containers/conmon/releases/download/v2.1.12/conmon.amd64 -o release/usr/bin/conmon
+chmod +x release/usr/bin/conmon
 
 # Install crun
-curl -L https://github.com/containers/crun/releases/download/1.15/crun-1.15-linux-amd64 -o release/bin/crun
-chmod +x release/bin/crun
+curl -L https://github.com/containers/crun/releases/download/1.15/crun-1.15-linux-amd64 -o release/usr/bin/crun
+chmod +x release/usr/bin/crun
 
 # Install fuse-overlayfs
-curl -L https://github.com/containers/fuse-overlayfs/releases/download/v1.13/fuse-overlayfs-x86_64 -o release/bin/fuse-overlayfs
-chmod +x release/bin/fuse-overlayfs
+curl -L https://github.com/containers/fuse-overlayfs/releases/download/v1.13/fuse-overlayfs-x86_64 -o release/usr/bin/fuse-overlayfs
+chmod +x release/usr/bin/fuse-overlayfs
 
 # Install netavark
-mkdir -p release/lib/podman
-cp ../netavark/bin/netavark release/lib/podman/
-chmod +x release/lib/podman/netavark
+mkdir -p release/usr/lib/podman
+cp ../netavark/bin/netavark release/usr/lib/podman/
+chmod +x release/usr/lib/podman/netavark
 
 # Install config
 # https://github.com/containers/common/blob/main/pkg/config/containers.conf
